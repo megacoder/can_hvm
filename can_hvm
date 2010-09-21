@@ -1,0 +1,19 @@
+#!/bin/zsh
+CANIT=$(
+	# Check for Intel (vmx) or AMD (svm)
+	/bin/egrep -w '^flags' /proc/cpuinfo	|
+	/usr/bin/head -n1			|
+	/bin/egrep -qsw 'vmx|svm' && echo yes || echo no
+)
+echo -e "CPU\t${CANIT}"
+XEN=$(
+	/bin/egrep -qs hvm- /sys/hypervisor/properties/cababilities >/dev/null 2>&1 &&
+	echo -en yes ||
+	echo -en no
+)
+echo -e "XEN\t${XEN}"
+KVM=$(
+	[ -d /sys/class/misc/kvm ] && echo yes || echo no
+)
+echo -e "KVM\t${KVM}"
+exit
