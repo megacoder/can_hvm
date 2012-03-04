@@ -3,7 +3,7 @@
 function no_hvm()	{
 	/bin/egrep -w '^flags' /proc/cpuinfo	|
 	/usr/bin/head -n1			|
-	/bin/egrep -qsw 'vmx|svm'
+	/bin/fgrep -qsw -e vmx -e svm -e hypervisor
 	return $?
 }
 function no_kvm()	{
