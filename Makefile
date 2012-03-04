@@ -10,7 +10,7 @@ BINDIR	=${PREFIX}/bin
 
 INSTALL	=install
 
-FILES	=can_hvm
+FILES	=can-virt
 
 all::	${FILES}
 
